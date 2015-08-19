@@ -1,0 +1,29 @@
+{
+  "name": "react-input-completion",
+  "version": "0.0.1",
+  "description": "A cross-browser autocomplete component for React",
+  "repository": "https://www.github.com/imcnally/react-input-completion",
+  "main": "dist/react-input-completion.js",
+  "scripts": {
+    "prepublish": "webpack",
+    "start": "webpack-dev-server --content-base src/ --port 3000 --hot --inline",
+    "test": "karma start test/karma.conf.js"
+  },
+  "author": "Ian McNally <ianmcnally@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-loader": "^5.3.2",
+    "babelify": "^6.1.2",
+    "jasmine-core": "^2.3.4",
+    "karma": "^0.13.3",
+    "karma-babel-preprocessor": "^5.2.1",
+    "karma-mocha": "^0.2.0",
+    "karma-notify-reporter": "^0.1.1",
+    "karma-phantomjs-launcher": "^0.2.0",
+    "karma-sinon-chai": "^1.0.0",
+    "karma-webpack": "^1.7.0",
+    "phantomjs": "^1.9.17",
+    "react": "^0.13.3",
+    "webpack": "^1.11.0"
+  }
+}
