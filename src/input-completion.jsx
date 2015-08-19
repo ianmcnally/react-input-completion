@@ -41,7 +41,6 @@ export default class InputCompletion extends Component {
 
   _supportsNative () {
     let feature = document.createElement('datalist')
-
     return Boolean(feature && feature.options)
   }
 
@@ -147,9 +146,10 @@ export default class InputCompletion extends Component {
 
   onChange (event) {
     let { value } = event.target
-    let newState = {selectedSuggestion: 0, value}
+    let newState = {value}
 
     if (!this.state.nativeSupport) {
+      newState.selectedSuggestion = 0
       newState.showSuggestions = true
       newState.shownOptions = this.state.options.filter((option) => this._isOptionShown(value, option))
     }
@@ -169,5 +169,7 @@ export default class InputCompletion extends Component {
 }
 
 InputCompletion.propTypes = {
-  name: PropTypes.string.isRequired
+  children: PropTypes.element.isRequired,
+  name: PropTypes.string.isRequired,
+  options: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
 }
