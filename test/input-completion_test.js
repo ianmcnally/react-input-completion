@@ -2,15 +2,14 @@ import InputCompletion from '../src/input-completion.jsx'
 import React, { addons } from 'react/addons'
 const {
   findRenderedDOMComponentWithTag,
-  renderIntoDocument,
-  scryRenderedDOMComponentsWithTag,
-  Simulate
+  Simulate,
+  renderIntoDocument
 } = addons.TestUtils
 const { stub } = sinon
 
 describe('InputCompletion', () => {
 
-  context('determining native support', () => {
+  context('browser support', () => {
 
     beforeEach(() => {
       stub(document, 'createElement')
@@ -40,7 +39,7 @@ describe('InputCompletion', () => {
 
   })
 
-  context('native', () => {
+  context('rendered component', () => {
     let component, props
 
     beforeEach(() => {
@@ -48,18 +47,11 @@ describe('InputCompletion', () => {
         options : ['First', 'Second', 'Chrome', 'Bill Murray'],
         name : 'numbers'
       }
-
-      stub(InputCompletion.prototype, '_supportsNative').returns(true)
-
       component = renderIntoDocument(
         <InputCompletion {...props}>
           <input />
         </InputCompletion>
       )
-    })
-
-    afterEach(() => {
-      InputCompletion.prototype._supportsNative.restore()
     })
 
     it('sets props.options on state', () => {
@@ -78,31 +70,9 @@ describe('InputCompletion', () => {
       const { list, onBlur, onChange, value } = input.props
 
       expect(list).to.equal(props.name)
-      expect(onBlur).to.be.a('function')
       expect(onChange).to.be.a('function')
       expect(value).to.equal(component.state.value)
       expect(component.refs.input).to.equal(input)
-    })
-
-    it('creates a datalist with an id of props.name', () => {
-      let datalist = findRenderedDOMComponentWithTag(component, 'datalist')
-
-      expect(datalist).to.be.ok
-      expect(datalist.props.id).to.equal(props.name)
-    })
-
-    it('creates an <option> for each prop.options', () => {
-      let optionElements = scryRenderedDOMComponentsWithTag(component, 'option')
-
-      expect(optionElements).to.have.length(props.options.length)
-    })
-
-    it('sets a value for each option', () => {
-      let index = 0
-      let optionElements = scryRenderedDOMComponentsWithTag(component, 'option')
-      let optionElement = optionElements[index]
-
-      expect(optionElement.props.value).to.equal(props.options[index])
     })
 
     it('updates the state on input change', () => {

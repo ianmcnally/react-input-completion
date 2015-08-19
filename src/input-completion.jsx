@@ -58,10 +58,10 @@ export default class InputCompletion extends Component {
         'lookahead__option': true,
         'lookahead__option--selected': isSelected
       })
-      let onClick = this.onFallbackOptionClick.bind(this, option)
+      let onMouseDown = this.onFallbackOptionClick.bind(this, option)
 
       return (
-        <li className={classNames} aria-selected={isSelected} key={index} onMouseDown={onClick} role='option'>
+        <li className={classNames} aria-selected={isSelected} key={index} onMouseDown={onMouseDown} role='option'>
           {option}
         </li>
       )
