@@ -3,6 +3,13 @@
   "version": "0.0.1",
   "description": "A cross-browser autocomplete component for React",
   "repository": "https://www.github.com/imcnally/react-input-completion",
+  "keywords": [
+    "react",
+    "autocomplete",
+    "input",
+    "datalist",
+    "lookahead"
+  ],
   "main": "dist/react-input-completion.js",
   "scripts": {
     "prepublish": "webpack",
@@ -25,5 +32,8 @@
     "phantomjs": "^1.9.17",
     "react": "^0.13.3",
     "webpack": "^1.11.0"
+  },
+  "dependencies": {
+    "classnames": "^2.1.3"
   }
 }
