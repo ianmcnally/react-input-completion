@@ -1,6 +1,7 @@
 import InputCompletion from '../src/input-completion.jsx'
 import React, { addons } from 'react/addons'
 const {
+  findRenderedDOMComponentWithTag,
   renderIntoDocument,
   scryRenderedDOMComponentsWithTag
 } = addons.TestUtils
@@ -67,15 +68,25 @@ describe('InputCompletion with fallback', () => {
   })
 
   context('rendering', () => {
-    it('renders a <ul> to hold the options')
+    it('renders a <ul> to hold the options', () => {
+      let ul = findRenderedDOMComponentWithTag(component, 'ul')
 
-    it('renders an <li> for each option')
+      expect(ul).to.be.ok
+    })
 
-    it('sets a inline style of state.inputWidth on the container')
+    it('sets a inline style of state.inputWidth on the container', () => {
+      let ul = findRenderedDOMComponentWithTag(component, 'ul')
 
-    it('sets aria attributes on the container')
+      expect(ul.props.style).to.include({width: component.state.inputWidth})
+    })
 
-    it('sets aria attributes on an option')
+    it('sets aria attributes on the container', () => {
+      let ul = findRenderedDOMComponentWithTag(component, 'ul')
+
+      expect(ul.props['aria-multiselectable']).to.equal('false')
+      expect(ul.props.role).to.equal('listbox')
+    })
+
   })
 
   context('on input', () => {
@@ -101,6 +112,7 @@ describe('InputCompletion with fallback', () => {
     it('decreases the selected option on up arrow press')
 
     it('stops decreasing if up arrow is pressed but it is at the beginning of the options')
+    it('sets aria attributes on an option')
   })
 
 })
