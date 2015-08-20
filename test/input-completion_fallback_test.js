@@ -117,19 +117,23 @@ describe('InputCompletion with fallback', () => {
       let value = 'bill'
 
       Simulate.change(input, {target: {value}})
+      let optionsContainer = findRenderedDOMComponentWithTag(component, 'ul')
       let options = scryRenderedDOMComponentsWithTag(component, 'li')
 
+      expect(optionsContainer.props.style).to.include({display: 'block'})
       expect(options).to.be.ok
       expect(options).to.have.length(1)
       expect(options).to.have.deep.property('[0].props.children', 'Bill Murray')
     })
 
     it('doesnt show any options if value does not match any option', () => {
-      let value = 'TK' // TK doesn't appear together in English :D
+      let value = ''
 
       Simulate.change(input, {target: {value}})
+      let optionsContainer = findRenderedDOMComponentWithTag(component, 'ul')
       let options = scryRenderedDOMComponentsWithTag(component, 'li')
 
+      expect(optionsContainer.props.style).to.include({display: 'none'})
       expect(options).to.be.empty
     })
   })
@@ -172,14 +176,34 @@ describe('InputCompletion with fallback', () => {
       expect(input.props.value).to.equal(optionValue)
     })
 
-    it('hides options on option click')
-    // change hide to not deal with classes
+    it('hides options on option click', () => {
+      let optionsContainer = findRenderedDOMComponentWithTag(component, 'ul')
 
-    it('hides options on input blur')
-    // change hide to not deal with classes
+      expect(optionsContainer.props.style).to.include({display: 'block'})
 
-    it('sets a selected class when the option is selected')
-    // change how selected
+      Simulate.keyDown(input, {key: 'ArrowDown'})
+      Simulate.mouseDown(option)
+
+      expect(optionsContainer.props.style).to.include({display: 'none'})
+    })
+
+    it('hides options on input blur', () => {
+      let optionsContainer = findRenderedDOMComponentWithTag(component, 'ul')
+
+      expect(optionsContainer.props.style).to.include({display: 'block'})
+
+      Simulate.blur(input)
+
+      expect(optionsContainer.props.style).to.include({display: 'none'})
+    })
+
+    it('sets a selected attribute when the option is selected', () => {
+      expect(option.props['aria-selected']).to.be.false
+
+      Simulate.keyDown(input, {key: 'ArrowDown'})
+
+      expect(option.props['aria-selected']).to.be.true
+    })
 
     it('increases the selected option on down arrow press', () => {
       let currentSelection = component.state.selectedSuggestion

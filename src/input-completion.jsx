@@ -1,13 +1,4 @@
-import {
-  addons,
-  Children,
-  cloneElement,
-  Component,
-  findDOMNode,
-  render,
-  PropTypes
-} from 'react'
-import cx from 'classnames'
+import { Children, cloneElement, Component, findDOMNode, PropTypes } from 'react'
 
 const keys = {
   down: 'ArrowDown',
@@ -50,29 +41,27 @@ export default class InputCompletion extends Component {
     return input && option.match(optionRegex)
   }
 
+  _getFallbackContainerStyles () {
+    return {
+      display: (this.state.showSuggestions && this.state.value) ? 'block' : 'none',
+      width: this.state.inputWidth
+    }
+  }
+
   _renderFallbackOptions () {
     let options = this.state.shownOptions.map((option, index) => {
       let isSelected = index === this.state.selectedSuggestion
-      let classNames = cx({
-        'lookahead__option': true,
-        'lookahead__option--selected': isSelected
-      })
       let onMouseDown = this.onFallbackOptionClick.bind(this, option)
 
       return (
-        <li className={classNames} aria-selected={isSelected} key={index} onMouseDown={onMouseDown} role='option'>
+        <li aria-selected={isSelected} key={index} onMouseDown={onMouseDown} role='option'>
           {option}
         </li>
       )
     })
 
-    let classNames = cx({
-      'lookahead__fallback-options': true,
-      'lookahead__fallback-options--shown': this.state.showSuggestions && this.state.value
-    })
-
     return (
-      <ul aria-multiselectable='false' className={classNames} role='listbox' style={{width: this.state.inputWidth}}>
+      <ul aria-multiselectable='false' role='listbox' style={this._getFallbackContainerStyles()}>
         {options}
       </ul>
     )
@@ -158,7 +147,7 @@ export default class InputCompletion extends Component {
 
   render () {
     return (
-      <section className='lookahead'>
+      <section>
         {this._renderChildren()}
         {this._renderOptions()}
       </section>
