@@ -125,7 +125,7 @@ describe('InputCompletion with fallback', () => {
     })
 
     it('doesnt show any options if value does not match any option', () => {
-      let value = 'TDK'
+      let value = 'TK' // TK doesn't appear together in English :D
 
       Simulate.change(input, {target: {value}})
       let options = scryRenderedDOMComponentsWithTag(component, 'li')
@@ -135,21 +135,92 @@ describe('InputCompletion with fallback', () => {
   })
 
   context('options', () => {
-    it('updates the input value to option.value on option click')
+    let input, option, optionValue
+
+    beforeEach(() => {
+      let value = 'i' // will match First & Bill Murray
+
+      input = findRenderedDOMComponentWithTag(component, 'input')
+      Simulate.change(input, {target: {value}})
+
+      option = scryRenderedDOMComponentsWithTag(component, 'li')[1]
+      optionValue = 'Bill Murray'
+    })
+
+    afterEach(() => {
+      component.setState({selectedSuggestion: 0})
+    })
+
+    it('sets aria attributes on an option', () => {
+      expect(option.props.role).to.equal('option')
+    })
+
+    it('updates the input value to option.value on option mouseDown', () => {
+      expect(input.props.value).not.to.equal(optionValue)
+
+      Simulate.mouseDown(option)
+
+      expect(input.props.value).to.equal(optionValue)
+    })
+
+    it('updates the input value to option.value on option Enter press', () => {
+      expect(input.props.value).not.to.equal(optionValue)
+
+      Simulate.keyDown(input, {key: 'ArrowDown'})
+      Simulate.keyDown(input, {key: 'Enter'})
+
+      expect(input.props.value).to.equal(optionValue)
+    })
+
     it('hides options on option click')
+    // change hide to not deal with classes
 
     it('hides options on input blur')
+    // change hide to not deal with classes
 
     it('sets a selected class when the option is selected')
+    // change how selected
 
-    it('increases the selected option on down arrow press')
+    it('increases the selected option on down arrow press', () => {
+      let currentSelection = component.state.selectedSuggestion
 
-    it('stops increasing if down arrow is pressed but it is at the end of the options')
+      Simulate.keyDown(input, {key: 'ArrowDown'})
 
-    it('decreases the selected option on up arrow press')
+      expect(component.state.selectedSuggestion).to.equal(currentSelection + 1)
+    })
 
-    it('stops decreasing if up arrow is pressed but it is at the beginning of the options')
-    it('sets aria attributes on an option')
+    it('stops increasing if down arrow is pressed but it is at the end of the options', () => {
+      let currentSelection = component.state.selectedSuggestion
+
+      Simulate.keyDown(input, {key: 'ArrowDown'})
+      Simulate.keyDown(input, {key: 'ArrowDown'})
+      Simulate.keyDown(input, {key: 'ArrowDown'})
+      Simulate.keyDown(input, {key: 'ArrowDown'})
+
+      expect(component.state.selectedSuggestion).to.equal(1)
+    })
+
+    it('decreases the selected option on up arrow press', () => {
+      Simulate.keyDown(input, {key: 'ArrowDown'})
+      expect(component.state.selectedSuggestion).to.equal(1)
+
+      Simulate.keyDown(input, {key: 'ArrowUp'})
+
+      expect(component.state.selectedSuggestion).to.equal(0)
+    })
+
+    it('stops decreasing if up arrow is pressed but it is at the beginning of the options', () => {
+      Simulate.keyDown(input, {key: 'ArrowDown'})
+      expect(component.state.selectedSuggestion).to.equal(1)
+
+      Simulate.keyDown(input, {key: 'ArrowUp'})
+      Simulate.keyDown(input, {key: 'ArrowUp'})
+      Simulate.keyDown(input, {key: 'ArrowUp'})
+      Simulate.keyDown(input, {key: 'ArrowUp'})
+
+      expect(component.state.selectedSuggestion).to.equal(0)
+    })
+
   })
 
 })
