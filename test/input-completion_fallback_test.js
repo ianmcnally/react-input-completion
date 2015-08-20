@@ -3,7 +3,8 @@ import React, { addons } from 'react/addons'
 const {
   findRenderedDOMComponentWithTag,
   renderIntoDocument,
-  scryRenderedDOMComponentsWithTag
+  scryRenderedDOMComponentsWithTag,
+  Simulate
 } = addons.TestUtils
 const { stub } = sinon
 
@@ -90,15 +91,51 @@ describe('InputCompletion with fallback', () => {
   })
 
   context('on input', () => {
-    it('updates the input value to option.value on option click')
-    it('sets options based on matching the input text')
-    it('updates the input value on input change')
-    it('resets the selected option on input change')
-    it('shows options on input change')
-    it('doesnt show any options if value does not match any option')
+    let input, options
+
+    beforeEach(() => {
+      input = findRenderedDOMComponentWithTag(component, 'input')
+    })
+
+    it('updates the input value on input change', () => {
+      let value = '40 Thoughts We All Had The Night Before The First Day Of School'
+
+      Simulate.change(input, {target: {value}})
+
+      expect(component.state.value).to.equal(value)
+    })
+
+    it('resets the selected option on input change', () => {
+      component.state.selectedSuggestion = 1
+
+      Simulate.change(input)
+
+      expect(component.state.selectedSuggestion).to.equal(0)
+    })
+
+    it('shows options based on matching the input text', () => {
+      let value = 'bill'
+
+      Simulate.change(input, {target: {value}})
+      let options = scryRenderedDOMComponentsWithTag(component, 'li')
+
+      expect(options).to.be.ok
+      expect(options).to.have.length(1)
+      expect(options).to.have.deep.property('[0].props.children', 'Bill Murray')
+    })
+
+    it('doesnt show any options if value does not match any option', () => {
+      let value = 'TDK'
+
+      Simulate.change(input, {target: {value}})
+      let options = scryRenderedDOMComponentsWithTag(component, 'li')
+
+      expect(options).to.be.empty
+    })
   })
 
   context('options', () => {
+    it('updates the input value to option.value on option click')
     it('hides options on option click')
 
     it('hides options on input blur')

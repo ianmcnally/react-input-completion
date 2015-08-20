@@ -46,9 +46,8 @@ export default class InputCompletion extends Component {
 
   _isOptionShown (input, option) {
     let optionRegex = new RegExp(input, 'gi')
-    let optionMatchesInput = input && option.match(optionRegex)
 
-    return this.state.showSuggestions && optionMatchesInput
+    return input && option.match(optionRegex)
   }
 
   _renderFallbackOptions () {
