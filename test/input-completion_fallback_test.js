@@ -24,6 +24,10 @@ describe('InputCompletion with fallback', () => {
     )
   })
 
+  afterEach(() => {
+    InputCompletion.prototype._supportsNative.restore()
+  })
+
   it('does not render a <datalist> or <option>', () => {
     let datalist = scryRenderedDOMComponentsWithTag(component, 'datalist')
     let options = scryRenderedDOMComponentsWithTag(component, 'option')
@@ -32,44 +36,71 @@ describe('InputCompletion with fallback', () => {
     expect(options).to.be.empty
   })
 
-  it('initializes state variables for the fallback')
+  context('initialization', () => {
+    let component, inputWidth
 
-  it('sets state.inputWidth based on the input width')
+    beforeEach(() => {
+      inputWidth = 150
+      stub(React, 'findDOMNode').returns({offsetWidth: inputWidth})
 
-  it('renders a <ul> to hold the options')
+      component = renderIntoDocument(
+        <InputCompletion {...props}>
+          <input />
+        </InputCompletion>
+      )
+    })
 
-  it('renders an <li> for each option')
+    afterEach(() => {
+      React.findDOMNode.restore()
+    })
 
-  it('sets a inline style of state.inputWidth on the container')
+    it('initializes state variables for the fallback', () => {
+      expect(component.state).to.include({
+        inputWidth: `${inputWidth}px`,
+        selectedSuggestion: 0,
+        showSuggestions: false
+      })
+      // strict equality doesn't work for arrays
+      expect(component.state).to.have.property('shownOptions').that.is.an('array')
+    })
 
-  it('sets aria attributes on the container')
+  })
 
-  it('sets aria attributes on an option')
+  context('rendering', () => {
+    it('renders a <ul> to hold the options')
 
-  it('updates the input value to option.value on option click')
+    it('renders an <li> for each option')
 
-  it('hides options on option click')
+    it('sets a inline style of state.inputWidth on the container')
 
-  it('hides options on input blur')
+    it('sets aria attributes on the container')
 
-  it('sets a selected class when the option is selected')
+    it('sets aria attributes on an option')
+  })
 
-  it('sets options based on matching the input text')
+  context('on input', () => {
+    it('updates the input value to option.value on option click')
+    it('sets options based on matching the input text')
+    it('updates the input value on input change')
+    it('resets the selected option on input change')
+    it('shows options on input change')
+    it('doesnt show any options if value does not match any option')
+  })
 
-  it('increases the selected option on down arrow press')
+  context('options', () => {
+    it('hides options on option click')
 
-  it('stops increasing if down arrow is pressed but it is at the end of the options')
+    it('hides options on input blur')
 
-  it('decreases the selected option on up arrow press')
+    it('sets a selected class when the option is selected')
 
-  it('stops decreasing if up arrow is pressed but it is at the beginning of the options')
+    it('increases the selected option on down arrow press')
 
-  it('updates the input value on input change')
+    it('stops increasing if down arrow is pressed but it is at the end of the options')
 
-  it('resets the selected option on input change')
+    it('decreases the selected option on up arrow press')
 
-  it('shows options on input change')
-
-  it('doesnt show any options if value does not match any option')
+    it('stops decreasing if up arrow is pressed but it is at the beginning of the options')
+  })
 
 })
