@@ -5,7 +5,8 @@ A cross-browser autocomplete component for React. `<InputCompletion>` defaults t
 
 `<InputCompletion>` wraps an input, and connects it to a list of `options`.
 
-Params:
+Props:
+  `onValueChange` - Callback function for when input value changes. Arguments: DOMEvent, value.
   `options` - Array of suggestions to present to the user
   `name` -  Unique identifier for the list
 

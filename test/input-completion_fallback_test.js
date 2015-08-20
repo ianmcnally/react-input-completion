@@ -6,13 +6,14 @@ const {
   scryRenderedDOMComponentsWithTag,
   Simulate
 } = addons.TestUtils
-const { stub } = sinon
+const { match, stub } = sinon
 
 describe('InputCompletion with fallback', () => {
   let props, component
 
   beforeEach(() => {
     props = {
+      onValueChange: stub(),
       options : ['First', 'Second', 'Chrome', 'Bill Murray'],
       name : 'numbers'
     }
@@ -103,6 +104,15 @@ describe('InputCompletion with fallback', () => {
       Simulate.change(input, {target: {value}})
 
       expect(component.state.value).to.equal(value)
+    })
+
+    it('calls props.onValueChange on input change', () => {
+      let value = 'sup victor'
+      let input = findRenderedDOMComponentWithTag(component, 'input')
+
+      Simulate.change(input, { target: {value} })
+
+      expect(props.onValueChange).to.have.been.calledWith(match.object, value)
     })
 
     it('resets the selected option on input change', () => {

@@ -143,6 +143,10 @@ export default class InputCompletion extends Component {
     }
 
     this.setState(newState)
+
+    if (this.props.onValueChange) {
+      this.props.onValueChange(event, value)
+    }
   }
 
   render () {
@@ -159,5 +163,6 @@ export default class InputCompletion extends Component {
 InputCompletion.propTypes = {
   children: PropTypes.element.isRequired,
   name: PropTypes.string.isRequired,
+  onValueChange: PropTypes.func,
   options: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
 }

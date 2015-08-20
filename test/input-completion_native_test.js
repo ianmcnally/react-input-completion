@@ -3,15 +3,17 @@ import React, { addons } from 'react/addons'
 const {
   findRenderedDOMComponentWithTag,
   renderIntoDocument,
-  scryRenderedDOMComponentsWithTag
+  scryRenderedDOMComponentsWithTag,
+  Simulate
 } = addons.TestUtils
-const { stub } = sinon
+const { match, stub } = sinon
 
 describe('InputCompletion with native support', () => {
   let component, props
 
   beforeEach(() => {
     props = {
+      onValueChange: stub(),
       options : ['First', 'Second', 'Chrome', 'Bill Murray'],
       name : 'numbers'
     }
@@ -48,6 +50,19 @@ describe('InputCompletion with native support', () => {
     let optionElement = optionElements[index]
 
     expect(optionElement.props.value).to.equal(props.options[index])
+  })
+
+  context('on input', () => {
+
+    it('calls props.onValueChange on input change', () => {
+      let value = 'sup victor'
+      let input = findRenderedDOMComponentWithTag(component, 'input')
+
+      Simulate.change(input, { target: {value} })
+
+      expect(props.onValueChange).to.have.been.calledWith(match.object, value)
+    })
+
   })
 
 
