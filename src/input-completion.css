@@ -1,0 +1,19 @@
+.ric-fb-options {
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.ric-fb-option {
+  cursor: default;
+  font-size: .8em;
+  list-style-type: none;
+  line-height: 2;
+  border: 1px solid #98BFE5;
+  border-top: none;
+}
+
+.ric-fb-option[aria-selected="true"],
+.ric-fb-option:hover {
+  background-color: #B3D8FD;
+}

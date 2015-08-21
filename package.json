@@ -12,7 +12,7 @@
   ],
   "main": "react-input-completion.js",
   "scripts": {
-    "prepublish": "babel src/input-completion.jsx --out-file react-input-completion.js && cp src/react-input-completion.css ./",
+    "prepublish": "babel src/input-completion.jsx --out-file react-input-completion.js && cp src/input-completion.css ./react-input-completion.css",
     "start": "webpack-dev-server --content-base src/ --port 3000 --hot --inline",
     "test": "karma start test/karma.conf.js"
   },
