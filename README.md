@@ -1,7 +1,7 @@
 # react-input-completion
 A cross-browser autocomplete component for React.
 
-`<InputCompletion>` defaults to the native `<datalist>` and polyfills any unsupported browsers, with no external dependencies.
+`<InputCompletion>` defaults to the native HTML5 `<datalist>` (unless you prefer it didn't) and polyfills any unsupported browsers, with no external dependencies.
 
 ## Usage
 
@@ -29,6 +29,8 @@ A cross-browser autocomplete component for React.
   `options` - Array of suggestions to present to the user. They can be updated at any time.
 
   `name` -  Unique identifier for the list
+
+  `useNative` - Boolean (optional) to use native HTML5 `<datalist>` if possible. Default: `true`.
 
 ### Styles
 Default styles (for fallback to match native

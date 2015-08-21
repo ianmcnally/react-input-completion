@@ -21,8 +21,10 @@ export default class InputCompletion extends Component {
   }
 
   componentDidMount () {
+    const { useNative } = this.props
+
     let newState = {
-      nativeSupport: this._supportsNative()
+      nativeSupport: (!useNative) ? false : this._supportsNative()
     }
 
     if (!newState.nativeSupport) {
@@ -162,9 +164,14 @@ export default class InputCompletion extends Component {
 
 }
 
+InputCompletion.defaultProps = {
+  useNative: true
+}
+
 InputCompletion.propTypes = {
   children: PropTypes.element.isRequired,
   name: PropTypes.string.isRequired,
   onValueChange: PropTypes.func,
-  options: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
+  options: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  useNative: PropTypes.bool
 }

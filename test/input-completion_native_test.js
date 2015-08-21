@@ -52,6 +52,20 @@ describe('InputCompletion with native support', () => {
     expect(optionElement.props.value).to.equal(props.options[index])
   })
 
+  it('does not render the native datalist is props.useNative is false', () => {
+    let component = renderIntoDocument(
+      <InputCompletion {...props} useNative={false}>
+        <input />
+      </InputCompletion>
+    )
+
+    let datalist = scryRenderedDOMComponentsWithTag(component, 'datalist')
+    let fallback = findRenderedDOMComponentWithTag(component, 'ul')
+
+    expect(datalist).to.be.empty
+    expect(fallback).to.be.ok
+  })
+
   context('on input', () => {
 
     it('calls props.onValueChange on input change', () => {

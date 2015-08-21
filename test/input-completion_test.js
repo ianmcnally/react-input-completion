@@ -9,6 +9,12 @@ const { stub } = sinon
 
 describe('InputCompletion', () => {
 
+  it('sets the correct default props', () => {
+    expect(InputCompletion.defaultProps).to.include({
+      useNative: true
+    })
+  })
+
   context('browser support', () => {
 
     beforeEach(() => {
