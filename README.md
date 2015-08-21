@@ -7,11 +7,14 @@ A cross-browser autocomplete component for React.
 
 `<InputCompletion>` wraps an input, and connects it to a list of `options`.
 
+### Installation
+
+`npm install --save react-input-completion`
+
 ### Example
 
 ```jsx
   // in your component's render function
-
   var browsers = ['Chrome', 'Firefox', 'IE', 'Safari'];
   var onChange = this.onChange.bind(this);
 
