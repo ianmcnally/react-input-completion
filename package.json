@@ -13,7 +13,7 @@
   "main": "react-input-completion.js",
   "scripts": {
     "prepublish": "babel src/input-completion.jsx --out-file react-input-completion.js && cp src/input-completion.css ./react-input-completion.css",
-    "start": "webpack-dev-server --content-base src/ --port 3000 --hot --inline",
+    "start": "webpack-dev-server --content-base demo/ --port 3000 --hot --inline",
     "test": "karma start test/karma.conf.js"
   },
   "author": "Ian McNally <ianmcnally@gmail.com>",
@@ -24,6 +24,7 @@
   "devDependencies": {
     "babel": "^5.8.21",
     "babel-loader": "^5.3.2",
+    "css-loader": "^0.16.0",
     "jasmine-core": "^2.3.4",
     "karma": "^0.13.3",
     "karma-babel-preprocessor": "^5.2.1",
@@ -33,6 +34,7 @@
     "karma-sinon-chai": "^1.0.0",
     "karma-webpack": "^1.7.0",
     "phantomjs": "^1.9.17",
+    "style-loader": "^0.12.3",
     "webpack": "^1.11.0",
     "webpack-dev-server": "^1.10.1"
   }

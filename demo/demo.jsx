@@ -1,5 +1,6 @@
 import React, { Component, render } from 'react'
-import InputCompletion from './input-completion.jsx'
+import InputCompletion from '../src/input-completion.jsx'
+import '../src/input-completion.css'
 
 class Demo extends Component {
 
@@ -18,7 +19,7 @@ class Demo extends Component {
   render () {
     return (
       <InputCompletion name='browsers' options={this.state.browsers}>
-        <input />
+        <input autofocus placeholder='Your browser name' />
       </InputCompletion>
     )
   }

@@ -3,7 +3,7 @@
 
 var PATHS = {
   OUTPUT : './dist',
-  SOURCE : './src'
+  SOURCE : './demo'
 };
 
 module.exports = {
@@ -17,7 +17,12 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'babel'
+      },
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        loader: 'style!css'
       }
     ]
   }
