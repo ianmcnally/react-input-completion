@@ -2,9 +2,6 @@ var PATHS = {
   OUTPUT : './dist',
   SOURCE : './src'
 };
-var LOADERS = {
-  JS : 'babel-loader'
-}
 
 module.exports = {
   entry: PATHS.SOURCE + '/input-completion.jsx',
@@ -16,7 +13,8 @@ module.exports = {
     loaders: [
       {
         test: /\.jsx?$/,
-        loader: LOADERS.JS
+        exclude: /node_modules/,
+        loader: 'babel-loader'
       }
     ]
   }

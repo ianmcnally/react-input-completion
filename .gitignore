@@ -1,5 +1,5 @@
 *.DS_Store
 node_modules
-react-currency-masked-input.js
+react-input-completion.js
 npm-debug.log
 dist
