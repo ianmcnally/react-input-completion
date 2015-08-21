@@ -57,14 +57,14 @@ export default class InputCompletion extends Component {
       let onMouseDown = this.onFallbackOptionClick.bind(this, option)
 
       return (
-        <li aria-selected={isSelected} key={index} onMouseDown={onMouseDown} role='option'>
+        <li aria-selected={isSelected} className='ric-fb-option' key={index} onMouseDown={onMouseDown} role='option'>
           {option}
         </li>
       )
     })
 
     return (
-      <ul aria-multiselectable='false' role='listbox' style={this._getFallbackContainerStyles()}>
+      <ul aria-multiselectable='false' className='ric-fb-options' role='listbox' style={this._getFallbackContainerStyles()}>
         {options}
       </ul>
     )
