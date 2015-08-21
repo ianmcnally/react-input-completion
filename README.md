@@ -1,23 +1,35 @@
 # react-input-completion
-A cross-browser autocomplete component for React. `<InputCompletion>` defaults to the native `<datalist>` and polyfills any unsupported browsers.
+A cross-browser autocomplete component for React.
 
-## Usage:
+`<InputCompletion>` defaults to the native `<datalist>` and polyfills any unsupported browsers, with no external dependencies.
+
+## Usage
 
 `<InputCompletion>` wraps an input, and connects it to a list of `options`.
 
-### Props
-  `onValueChange` - Callback function for when input value changes. Arguments: DOMEvent, value.
-  `options` - Array of suggestions to present to the user
-  `name` -  Unique identifier for the list
+### Example
 
 ```jsx
-  <InputCompletion options={} name=''>
-    <input />
+  // in your component's render function
+
+  var browsers = ['Chrome', 'Firefox', 'IE', 'Safari'];
+  var onChange = this.onChange.bind(this);
+
+  <InputCompletion options={browsers} name="browsers" onValueChange={onChange}>
+    <input placeholder="Enter your browser name" />
   </InputCompletion>
 ```
 
+### Props
+  `onValueChange` - Callback function for when input value changes. Arguments: DOMEvent, value.
+
+  `options` - Array of suggestions to present to the user
+
+  `name` -  Unique identifier for the list
+
 ### Styles
-Default styles (for fallback to match native) are available in react-input-completion.css.
+Default styles (for fallback to match native
+) are available in react-input-completion.css.
 
 ## Development
 
