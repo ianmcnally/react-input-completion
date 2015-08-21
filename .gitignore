@@ -3,3 +3,4 @@ node_modules
 react-input-completion.js
 npm-debug.log
 dist
+input-completion-demo.js

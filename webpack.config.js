@@ -1,13 +1,16 @@
+// Webpack is used for only local development
+// Babel is used for publishing to NPM (since it doesn't include dependencies)
+
 var PATHS = {
   OUTPUT : './dist',
   SOURCE : './src'
 };
 
 module.exports = {
-  entry: PATHS.SOURCE + '/input-completion.jsx',
+  entry: PATHS.SOURCE + '/demo.jsx',
   output: {
     path: PATHS.OUTPUT,
-    filename: 'react-input-completion.js'
+    filename: 'input-completion-demo.js'
   },
   module: {
     loaders: [

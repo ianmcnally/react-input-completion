@@ -24,7 +24,7 @@ Props:
 
 ### Developing
 
-1. `npm start` - Compiles code, starts web server at localhost:3000.
+1. `npm start` - Compiles code, starts web server and demo page at [localhost:3000](http://localhost:3000).
 
 ### Testing
 
