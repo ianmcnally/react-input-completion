@@ -1,4 +1,4 @@
-import { Children, cloneElement, Component, findDOMNode, PropTypes } from 'react'
+import React, { Children, cloneElement, Component, findDOMNode, PropTypes } from 'react'
 
 const keys = {
   down: 'ArrowDown',
@@ -16,18 +16,21 @@ export default class InputCompletion extends Component {
       selectedSuggestion: 0, // fallback only
       showSuggestions: false, // fallback only
       shownOptions: [], // fallback only
-      nativeSupport: this._supportsNative(),
       options: props.options, // options can be updated
       value: ''
     }
   }
 
   componentDidMount () {
-    if (this.state.nativeSupport) { return }
+    let newState = {
+      nativeSupport: this._supportsNative()
+    }
 
-    let inputWidth = findDOMNode(this.refs.input).offsetWidth + 'px'
+    if (!newState.nativeSupport) {
+      newState.inputWidth = findDOMNode(this.refs.input).offsetWidth + 'px'
+    }
 
-    this.setState({inputWidth})
+    this.setState(newState)
   }
 
   _supportsNative () {
