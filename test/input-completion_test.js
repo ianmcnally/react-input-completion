@@ -1,5 +1,5 @@
 import InputCompletion from '../src/input-completion.jsx'
-import React, { addons } from 'react/addons'
+import { addons } from 'react/addons'
 const {
   findRenderedDOMComponentWithTag,
   Simulate,
@@ -61,15 +61,15 @@ describe('InputCompletion', () => {
     })
 
     it('renders the input passed in as a child', () => {
-      let input = findRenderedDOMComponentWithTag(component, 'input')
+      const input = findRenderedDOMComponentWithTag(component, 'input')
 
       expect(input).to.be.ok
     })
 
     it('adds the correct properties to the child', () => {
-      let input = findRenderedDOMComponentWithTag(component, 'input')
+      const input = findRenderedDOMComponentWithTag(component, 'input')
 
-      const { list, onBlur, onChange, value } = input.props
+      const { list, onChange, value } = input.props
 
       expect(list).to.equal(props.name)
       expect(onChange).to.be.a('function')
@@ -78,8 +78,8 @@ describe('InputCompletion', () => {
     })
 
     it('updates the state on input change', () => {
-      let value = 'sup victor'
-      let input = findRenderedDOMComponentWithTag(component, 'input')
+      const value = 'sup victor'
+      const input = findRenderedDOMComponentWithTag(component, 'input')
 
       Simulate.change(input, { target: {value} })
 

@@ -32,8 +32,8 @@ describe('InputCompletion with fallback', () => {
   })
 
   it('does not render a <datalist> or <option>', () => {
-    let datalist = scryRenderedDOMComponentsWithTag(component, 'datalist')
-    let options = scryRenderedDOMComponentsWithTag(component, 'option')
+    const datalist = scryRenderedDOMComponentsWithTag(component, 'datalist')
+    const options = scryRenderedDOMComponentsWithTag(component, 'option')
 
     expect(datalist).to.be.empty
     expect(options).to.be.empty
@@ -71,19 +71,19 @@ describe('InputCompletion with fallback', () => {
 
   context('rendering', () => {
     it('renders a <ul> to hold the options', () => {
-      let ul = findRenderedDOMComponentWithTag(component, 'ul')
+      const ul = findRenderedDOMComponentWithTag(component, 'ul')
 
       expect(ul).to.be.ok
     })
 
     it('sets a inline style of state.inputWidth on the container', () => {
-      let ul = findRenderedDOMComponentWithTag(component, 'ul')
+      const ul = findRenderedDOMComponentWithTag(component, 'ul')
 
       expect(ul.props.style).to.include({width: component.state.inputWidth})
     })
 
     it('sets aria attributes on the container', () => {
-      let ul = findRenderedDOMComponentWithTag(component, 'ul')
+      const ul = findRenderedDOMComponentWithTag(component, 'ul')
 
       expect(ul.props['aria-multiselectable']).to.equal('false')
       expect(ul.props.role).to.equal('listbox')
@@ -92,14 +92,14 @@ describe('InputCompletion with fallback', () => {
   })
 
   context('on input', () => {
-    let input, options
+    let input
 
     beforeEach(() => {
       input = findRenderedDOMComponentWithTag(component, 'input')
     })
 
     it('updates the input value on input change', () => {
-      let value = '40 Thoughts We All Had The Night Before The First Day Of School'
+      const value = '40 Thoughts We All Had The Night Before The First Day Of School'
 
       Simulate.change(input, {target: {value}})
 
@@ -107,8 +107,8 @@ describe('InputCompletion with fallback', () => {
     })
 
     it('calls props.onValueChange on input change', () => {
-      let value = 'sup victor'
-      let input = findRenderedDOMComponentWithTag(component, 'input')
+      const value = 'sup victor'
+      const input = findRenderedDOMComponentWithTag(component, 'input')
 
       Simulate.change(input, { target: {value} })
 
@@ -124,11 +124,11 @@ describe('InputCompletion with fallback', () => {
     })
 
     it('shows options based on matching the input text', () => {
-      let value = 'bill'
+      const value = 'bill'
 
       Simulate.change(input, {target: {value}})
-      let optionsContainer = findRenderedDOMComponentWithTag(component, 'ul')
-      let options = scryRenderedDOMComponentsWithTag(component, 'li')
+      const optionsContainer = findRenderedDOMComponentWithTag(component, 'ul')
+      const options = scryRenderedDOMComponentsWithTag(component, 'li')
 
       expect(optionsContainer.props.style).to.include({display: 'block'})
       expect(options).to.be.ok
@@ -137,11 +137,11 @@ describe('InputCompletion with fallback', () => {
     })
 
     it('doesnt show any options if value does not match any option', () => {
-      let value = ''
+      const value = ''
 
       Simulate.change(input, {target: {value}})
-      let optionsContainer = findRenderedDOMComponentWithTag(component, 'ul')
-      let options = scryRenderedDOMComponentsWithTag(component, 'li')
+      const optionsContainer = findRenderedDOMComponentWithTag(component, 'ul')
+      const options = scryRenderedDOMComponentsWithTag(component, 'li')
 
       expect(optionsContainer.props.style).to.include({display: 'none'})
       expect(options).to.be.empty
@@ -152,7 +152,7 @@ describe('InputCompletion with fallback', () => {
     let input, option, optionValue
 
     beforeEach(() => {
-      let value = 'i' // will match First & Bill Murray
+      const value = 'i' // will match First & Bill Murray
 
       input = findRenderedDOMComponentWithTag(component, 'input')
       Simulate.change(input, {target: {value}})
@@ -187,7 +187,7 @@ describe('InputCompletion with fallback', () => {
     })
 
     it('hides options on option click', () => {
-      let optionsContainer = findRenderedDOMComponentWithTag(component, 'ul')
+      const optionsContainer = findRenderedDOMComponentWithTag(component, 'ul')
 
       expect(optionsContainer.props.style).to.include({display: 'block'})
 
@@ -198,7 +198,7 @@ describe('InputCompletion with fallback', () => {
     })
 
     it('hides options on input blur', () => {
-      let optionsContainer = findRenderedDOMComponentWithTag(component, 'ul')
+      const optionsContainer = findRenderedDOMComponentWithTag(component, 'ul')
 
       expect(optionsContainer.props.style).to.include({display: 'block'})
 
@@ -216,7 +216,7 @@ describe('InputCompletion with fallback', () => {
     })
 
     it('increases the selected option on down arrow press', () => {
-      let currentSelection = component.state.selectedSuggestion
+      const currentSelection = component.state.selectedSuggestion
 
       Simulate.keyDown(input, {key: 'ArrowDown'})
 
@@ -224,8 +224,6 @@ describe('InputCompletion with fallback', () => {
     })
 
     it('stops increasing if down arrow is pressed but it is at the end of the options', () => {
-      let currentSelection = component.state.selectedSuggestion
-
       Simulate.keyDown(input, {key: 'ArrowDown'})
       Simulate.keyDown(input, {key: 'ArrowDown'})
       Simulate.keyDown(input, {key: 'ArrowDown'})

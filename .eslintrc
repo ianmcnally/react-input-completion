@@ -1,0 +1,56 @@
+{
+    "rules": {
+        "indent": [
+            2, 2
+        ],
+        "quotes": [
+            2,
+            "single"
+        ],
+        "linebreak-style": [
+            2,
+            "unix"
+        ],
+        "semi": [
+            2,
+            "never"
+        ],
+        "func-style": [2, "expression"],
+        "new-parens": 2,
+        "no-array-constructor": 2,
+        "no-mixed-spaces-and-tabs": 2,
+        "no-multiple-empty-lines": 2,
+        "no-var": 2,
+        "no-var": 2,
+        "prefer-template": 2,
+        "constructor-super": 2,
+        "no-this-before-super": 2,
+        "object-shorthand": 2,
+        "prefer-arrow-callback": 2,
+        "prefer-const": 2,
+        "prefer-spread": 2,
+        "prefer-reflect": 2,
+        "arrow-spacing": 2
+    },
+    "env": {
+        "es6": true,
+        "browser": true,
+        "node": true,
+        "mocha": true
+    },
+    "globals": {
+        "chai": true,
+        "expect": true,
+        "sinon": true
+    },
+    "extends": "eslint:recommended",
+    "ecmaFeatures": {
+        "jsx": true,
+        "experimentalObjectRestSpread": true,
+        "modules": true,
+        "blockBindings": true
+    },
+    "plugins": [
+        "react"
+    ]
+}

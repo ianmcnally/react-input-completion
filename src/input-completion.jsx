@@ -1,4 +1,4 @@
-import React, { Children, cloneElement, Component, findDOMNode, PropTypes } from 'react'
+import { Children, cloneElement, Component, findDOMNode, PropTypes } from 'react'
 
 const keys = {
   down: 'ArrowDown',
@@ -23,24 +23,25 @@ export default class InputCompletion extends Component {
   componentDidMount () {
     const { useNative } = this.props
 
-    let newState = {
+    const newState = {
       nativeSupport: (!useNative) ? false : this._supportsNative()
     }
 
     if (!newState.nativeSupport) {
-      newState.inputWidth = findDOMNode(this.refs.input).offsetWidth + 'px'
+      const offsetWidth = findDOMNode(this.refs.input).offsetWidth
+      newState.inputWidth = `${offsetWidth}px`
     }
 
     this.setState(newState)
   }
 
   _supportsNative () {
-    let feature = document.createElement('datalist')
+    const feature = document.createElement('datalist')
     return Boolean(feature && feature.options)
   }
 
   _isOptionShown (input, option) {
-    let optionRegex = new RegExp(input, 'gi')
+    const optionRegex = new RegExp(input, 'gi')
 
     return input && option.match(optionRegex)
   }
@@ -53,9 +54,9 @@ export default class InputCompletion extends Component {
   }
 
   _renderFallbackOptions () {
-    let options = this.state.shownOptions.map((option, index) => {
-      let isSelected = index === this.state.selectedSuggestion
-      let onMouseDown = this.onFallbackOptionClick.bind(this, option)
+    const options = this.state.shownOptions.map((option, index) => {
+      const isSelected = index === this.state.selectedSuggestion
+      const onMouseDown = this.onFallbackOptionClick.bind(this, option)
 
       return (
         <li aria-selected={isSelected} className='ric-fb-option' key={index} onMouseDown={onMouseDown} role='option'>
@@ -76,7 +77,7 @@ export default class InputCompletion extends Component {
       return this._renderFallbackOptions()
     }
 
-    let options = this.props.options.map((option, index) => {
+    const options = this.props.options.map((option, index) => {
       return <option key={index} value={option} />
     })
 
@@ -88,8 +89,8 @@ export default class InputCompletion extends Component {
   }
 
   _renderChildren () {
-    let child = Children.only(this.props.children)
-    let props = {
+    const child = Children.only(this.props.children)
+    const props = {
       list: this.props.name,
       onBlur: this.onBlur.bind(this),
       onChange: this.onChange.bind(this),
@@ -106,22 +107,22 @@ export default class InputCompletion extends Component {
 
   onKeyDown (event) {
     const { key } = event
-    const { selectedSuggestion, shownOptions } = this.state;
-    let nextIndex = selectedSuggestion;
+    const { selectedSuggestion, shownOptions } = this.state
+    let nextIndex = selectedSuggestion
 
     switch (key) {
-      case keys.down:
-        let maxIndex = shownOptions.length - 1
-        nextIndex = (selectedSuggestion === maxIndex) ? maxIndex : selectedSuggestion + 1
-        break;
-      case keys.up:
-        nextIndex = (selectedSuggestion <= 0) ? 0 : selectedSuggestion - 1
-        break;
-      case keys.enter:
-        this.onFallbackOptionClick(shownOptions[selectedSuggestion])
-        break;
-      default:
-        return;
+    case keys.down:
+      const maxIndex = shownOptions.length - 1
+      nextIndex = (selectedSuggestion === maxIndex) ? maxIndex : selectedSuggestion + 1
+      break
+    case keys.up:
+      nextIndex = (selectedSuggestion <= 0) ? 0 : selectedSuggestion - 1
+      break
+    case keys.enter:
+      this.onFallbackOptionClick(shownOptions[selectedSuggestion])
+      break
+    default:
+      return
     }
 
     this.setState({selectedSuggestion: nextIndex})
@@ -137,8 +138,8 @@ export default class InputCompletion extends Component {
   }
 
   onChange (event) {
-    let { value } = event.target
-    let newState = {value}
+    const { value } = event.target
+    const newState = { value }
 
     if (!this.state.nativeSupport) {
       newState.selectedSuggestion = 0
