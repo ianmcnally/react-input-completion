@@ -16,7 +16,6 @@ export default class InputCompletion extends Component {
       selectedSuggestion: 0, // fallback only
       showSuggestions: false, // fallback only
       shownOptions: [], // fallback only
-      options: props.options, // options can be updated
       value: ''
     }
   }
@@ -75,7 +74,7 @@ export default class InputCompletion extends Component {
       return this._renderFallbackOptions()
     }
 
-    let options = this.state.options.map((option, index) => {
+    let options = this.props.options.map((option, index) => {
       return <option key={index} value={option} />
     })
 
@@ -142,7 +141,7 @@ export default class InputCompletion extends Component {
     if (!this.state.nativeSupport) {
       newState.selectedSuggestion = 0
       newState.showSuggestions = true
-      newState.shownOptions = this.state.options.filter((option) => this._isOptionShown(value, option))
+      newState.shownOptions = this.props.options.filter((option) => this._isOptionShown(value, option))
     }
 
     this.setState(newState)

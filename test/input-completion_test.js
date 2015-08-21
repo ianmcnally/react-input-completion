@@ -54,10 +54,6 @@ describe('InputCompletion', () => {
       )
     })
 
-    it('sets props.options on state', () => {
-      expect(component.state.options).to.equal(props.options)
-    }) 
-
     it('renders the input passed in as a child', () => {
       let input = findRenderedDOMComponentWithTag(component, 'input')
 

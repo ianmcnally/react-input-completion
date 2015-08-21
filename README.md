@@ -26,7 +26,7 @@ A cross-browser autocomplete component for React.
 ### Props
   `onValueChange` - Callback function for when input value changes. Arguments: DOMEvent, value.
 
-  `options` - Array of suggestions to present to the user
+  `options` - Array of suggestions to present to the user. They can be updated at any time.
 
   `name` -  Unique identifier for the list
 
