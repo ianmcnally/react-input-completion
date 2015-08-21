@@ -1,6 +1,6 @@
 {
   "name": "react-input-completion",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A cross-browser autocomplete component for React",
   "repository": "https://www.github.com/imcnally/react-input-completion",
   "keywords": [
