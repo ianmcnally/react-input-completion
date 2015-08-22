@@ -1,17 +1,17 @@
 import InputCompletion from '../src/input-completion.jsx'
-import { addons } from 'react/addons'
+import {addons} from 'react/addons'
 const {
   findRenderedDOMComponentWithTag,
   Simulate,
   renderIntoDocument
 } = addons.TestUtils
-const { stub } = sinon
+const {stub} = sinon
 
 describe('InputCompletion', () => {
 
   it('sets the correct default props', () => {
     expect(InputCompletion.defaultProps).to.include({
-      useNative: true
+      useNative : true
     })
   })
 
@@ -46,7 +46,8 @@ describe('InputCompletion', () => {
   })
 
   context('rendered component', () => {
-    let component, props
+    let component
+    let props
 
     beforeEach(() => {
       props = {
@@ -69,7 +70,7 @@ describe('InputCompletion', () => {
     it('adds the correct properties to the child', () => {
       const input = findRenderedDOMComponentWithTag(component, 'input')
 
-      const { list, onChange, value } = input.props
+      const {list, onChange, value} = input.props
 
       expect(list).to.equal(props.name)
       expect(onChange).to.be.a('function')
@@ -81,7 +82,7 @@ describe('InputCompletion', () => {
       const value = 'sup victor'
       const input = findRenderedDOMComponentWithTag(component, 'input')
 
-      Simulate.change(input, { target: {value} })
+      Simulate.change(input, {target : {value}})
 
       expect(component.state.value).to.equal(value)
     })
