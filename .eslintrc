@@ -90,7 +90,8 @@
         "no-delete-var": 2,
         "no-unused-vars": 2,
         "arrow-parens": [2, "always"],
-        "arrow-spacing": 2
+        "arrow-spacing": 2,
+        "object-curly-spacing": [2, "always"]
     },
     "env": {
         "es6": true,

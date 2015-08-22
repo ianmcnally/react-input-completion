@@ -1,12 +1,12 @@
 import InputCompletion from '../src/input-completion.jsx'
-import React, {addons} from 'react/addons'
+import React, { addons } from 'react/addons'
 const {
   findRenderedDOMComponentWithTag,
   renderIntoDocument,
   scryRenderedDOMComponentsWithTag,
   Simulate
 } = addons.TestUtils
-const {match, stub} = sinon
+const { match, stub } = sinon
 
 describe('InputCompletion with fallback', () => {
   let props
@@ -46,7 +46,7 @@ describe('InputCompletion with fallback', () => {
 
     beforeEach(() => {
       inputWidth = 150
-      stub(React, 'findDOMNode').returns({offsetWidth : inputWidth})
+      stub(React, 'findDOMNode').returns({ offsetWidth : inputWidth })
 
       component = renderIntoDocument(
         <InputCompletion {...props}>
@@ -81,7 +81,7 @@ describe('InputCompletion with fallback', () => {
     it('sets a inline style of state.inputWidth on the container', () => {
       const ul = findRenderedDOMComponentWithTag(component, 'ul')
 
-      expect(ul.props.style).to.include({width : component.state.inputWidth})
+      expect(ul.props.style).to.include({ width : component.state.inputWidth })
     })
 
     it('sets aria attributes on the container', () => {
@@ -103,7 +103,7 @@ describe('InputCompletion with fallback', () => {
     it('updates the input value on input change', () => {
       const value = '40 Thoughts We All Had The Night Before The First Day Of School'
 
-      Simulate.change(input, {target : {value}})
+      Simulate.change(input, { target : { value } })
 
       expect(component.state.value).to.equal(value)
     })
@@ -112,7 +112,7 @@ describe('InputCompletion with fallback', () => {
       const value = 'sup victor'
       const input = findRenderedDOMComponentWithTag(component, 'input')
 
-      Simulate.change(input, {target : {value}})
+      Simulate.change(input, { target : { value } })
 
       expect(props.onValueChange).to.have.been.calledWith(match.object, value)
     })
@@ -128,11 +128,11 @@ describe('InputCompletion with fallback', () => {
     it('shows options based on matching the input text', () => {
       const value = 'bill'
 
-      Simulate.change(input, {target : {value}})
+      Simulate.change(input, { target : { value } })
       const optionsContainer = findRenderedDOMComponentWithTag(component, 'ul')
       const options = scryRenderedDOMComponentsWithTag(component, 'li')
 
-      expect(optionsContainer.props.style).to.include({display : 'block'})
+      expect(optionsContainer.props.style).to.include({ display : 'block' })
       expect(options).to.be.ok
       expect(options).to.have.length(1)
       expect(options).to.have.deep.property('[0].props.children', 'Bill Murray')
@@ -141,11 +141,11 @@ describe('InputCompletion with fallback', () => {
     it('doesnt show any options if value does not match any option', () => {
       const value = ''
 
-      Simulate.change(input, {target : {value}})
+      Simulate.change(input, { target : { value } })
       const optionsContainer = findRenderedDOMComponentWithTag(component, 'ul')
       const options = scryRenderedDOMComponentsWithTag(component, 'li')
 
-      expect(optionsContainer.props.style).to.include({display : 'none'})
+      expect(optionsContainer.props.style).to.include({ display : 'none' })
       expect(options).to.be.empty
     })
   })
@@ -159,14 +159,14 @@ describe('InputCompletion with fallback', () => {
       const value = 'i' // will match First & Bill Murray
 
       input = findRenderedDOMComponentWithTag(component, 'input')
-      Simulate.change(input, {target : {value}})
+      Simulate.change(input, { target : { value } })
 
       option = scryRenderedDOMComponentsWithTag(component, 'li')[1]
       optionValue = 'Bill Murray'
     })
 
     afterEach(() => {
-      component.setState({selectedSuggestion : 0})
+      component.setState({ selectedSuggestion : 0 })
     })
 
     it('sets aria attributes on an option', () => {
@@ -184,8 +184,8 @@ describe('InputCompletion with fallback', () => {
     it('updates the input value to option.value on option Enter press', () => {
       expect(input.props.value).not.to.equal(optionValue)
 
-      Simulate.keyDown(input, {key : 'ArrowDown'})
-      Simulate.keyDown(input, {key : 'Enter'})
+      Simulate.keyDown(input, { key : 'ArrowDown' })
+      Simulate.keyDown(input, { key : 'Enter' })
 
       expect(input.props.value).to.equal(optionValue)
     })
@@ -193,28 +193,28 @@ describe('InputCompletion with fallback', () => {
     it('hides options on option click', () => {
       const optionsContainer = findRenderedDOMComponentWithTag(component, 'ul')
 
-      expect(optionsContainer.props.style).to.include({display : 'block'})
+      expect(optionsContainer.props.style).to.include({ display : 'block' })
 
-      Simulate.keyDown(input, {key : 'ArrowDown'})
+      Simulate.keyDown(input, { key : 'ArrowDown' })
       Simulate.mouseDown(option)
 
-      expect(optionsContainer.props.style).to.include({display : 'none'})
+      expect(optionsContainer.props.style).to.include({ display : 'none' })
     })
 
     it('hides options on input blur', () => {
       const optionsContainer = findRenderedDOMComponentWithTag(component, 'ul')
 
-      expect(optionsContainer.props.style).to.include({display : 'block'})
+      expect(optionsContainer.props.style).to.include({ display : 'block' })
 
       Simulate.blur(input)
 
-      expect(optionsContainer.props.style).to.include({display : 'none'})
+      expect(optionsContainer.props.style).to.include({ display : 'none' })
     })
 
     it('sets a selected attribute when the option is selected', () => {
       expect(option.props['aria-selected']).to.be.false
 
-      Simulate.keyDown(input, {key : 'ArrowDown'})
+      Simulate.keyDown(input, { key : 'ArrowDown' })
 
       expect(option.props['aria-selected']).to.be.true
     })
@@ -222,37 +222,37 @@ describe('InputCompletion with fallback', () => {
     it('increases the selected option on down arrow press', () => {
       const currentSelection = component.state.selectedSuggestion
 
-      Simulate.keyDown(input, {key : 'ArrowDown'})
+      Simulate.keyDown(input, { key : 'ArrowDown' })
 
       expect(component.state.selectedSuggestion).to.equal(currentSelection + 1)
     })
 
     it('stops increasing if down arrow is pressed but it is at the end of the options', () => {
-      Simulate.keyDown(input, {key : 'ArrowDown'})
-      Simulate.keyDown(input, {key : 'ArrowDown'})
-      Simulate.keyDown(input, {key : 'ArrowDown'})
-      Simulate.keyDown(input, {key : 'ArrowDown'})
+      Simulate.keyDown(input, { key : 'ArrowDown' })
+      Simulate.keyDown(input, { key : 'ArrowDown' })
+      Simulate.keyDown(input, { key : 'ArrowDown' })
+      Simulate.keyDown(input, { key : 'ArrowDown' })
 
       expect(component.state.selectedSuggestion).to.equal(1)
     })
 
     it('decreases the selected option on up arrow press', () => {
-      Simulate.keyDown(input, {key : 'ArrowDown'})
+      Simulate.keyDown(input, { key : 'ArrowDown' })
       expect(component.state.selectedSuggestion).to.equal(1)
 
-      Simulate.keyDown(input, {key : 'ArrowUp'})
+      Simulate.keyDown(input, { key : 'ArrowUp' })
 
       expect(component.state.selectedSuggestion).to.equal(0)
     })
 
     it('stops decreasing if up arrow is pressed but it is at the beginning of the options', () => {
-      Simulate.keyDown(input, {key : 'ArrowDown'})
+      Simulate.keyDown(input, { key : 'ArrowDown' })
       expect(component.state.selectedSuggestion).to.equal(1)
 
-      Simulate.keyDown(input, {key : 'ArrowUp'})
-      Simulate.keyDown(input, {key : 'ArrowUp'})
-      Simulate.keyDown(input, {key : 'ArrowUp'})
-      Simulate.keyDown(input, {key : 'ArrowUp'})
+      Simulate.keyDown(input, { key : 'ArrowUp' })
+      Simulate.keyDown(input, { key : 'ArrowUp' })
+      Simulate.keyDown(input, { key : 'ArrowUp' })
+      Simulate.keyDown(input, { key : 'ArrowUp' })
 
       expect(component.state.selectedSuggestion).to.equal(0)
     })

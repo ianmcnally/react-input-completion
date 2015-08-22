@@ -1,9 +1,9 @@
 import { Children, cloneElement, Component, findDOMNode, PropTypes } from 'react'
 
 const keys = {
-  down: 'ArrowDown',
-  enter: 'Enter',
-  up: 'ArrowUp'
+  down : 'ArrowDown',
+  enter : 'Enter',
+  up : 'ArrowUp'
 }
 
 export default class InputCompletion extends Component {
@@ -12,11 +12,11 @@ export default class InputCompletion extends Component {
     super(props)
 
     this.state = {
-      inputWidth: null, // fallback only
-      selectedSuggestion: 0, // fallback only
-      showSuggestions: false, // fallback only
-      shownOptions: [], // fallback only
-      value: ''
+      inputWidth : null, // fallback only
+      selectedSuggestion : 0, // fallback only
+      showSuggestions : false, // fallback only
+      shownOptions : [], // fallback only
+      value : ''
     }
   }
 
@@ -24,7 +24,7 @@ export default class InputCompletion extends Component {
     const { useNative } = this.props
 
     const newState = {
-      nativeSupport: (!useNative) ? false : this._supportsNative()
+      nativeSupport : (!useNative) ? false : this._supportsNative()
     }
 
     if (!newState.nativeSupport) {
@@ -48,8 +48,8 @@ export default class InputCompletion extends Component {
 
   _getFallbackContainerStyles () {
     return {
-      display: (this.state.showSuggestions && this.state.value) ? 'block' : 'none',
-      width: this.state.inputWidth
+      display : (this.state.showSuggestions && this.state.value) ? 'block' : 'none',
+      width : this.state.inputWidth
     }
   }
 
@@ -66,7 +66,8 @@ export default class InputCompletion extends Component {
     })
 
     return (
-      <ul aria-multiselectable='false' className='ric-fb-options' role='listbox' style={this._getFallbackContainerStyles()}>
+      <ul aria-multiselectable='false' className='ric-fb-options' role='listbox'
+        style={this._getFallbackContainerStyles()}>
         {options}
       </ul>
     )
@@ -91,11 +92,11 @@ export default class InputCompletion extends Component {
   _renderChildren () {
     const child = Children.only(this.props.children)
     const props = {
-      list: this.props.name,
-      onBlur: this.onBlur.bind(this),
-      onChange: this.onChange.bind(this),
-      ref: 'input',
-      value: this.state.value
+      list : this.props.name,
+      onBlur : this.onBlur.bind(this),
+      onChange : this.onChange.bind(this),
+      ref : 'input',
+      value : this.state.value
     }
 
     if (!this.state.nativeSupport) {
@@ -125,16 +126,16 @@ export default class InputCompletion extends Component {
       return
     }
 
-    this.setState({selectedSuggestion: nextIndex})
+    this.setState({ selectedSuggestion : nextIndex })
 
   }
 
   onFallbackOptionClick (option) {
-    this.setState({showSuggestions: false, value: option})
+    this.setState({ showSuggestions : false, value : option })
   }
 
   onBlur () {
-    this.setState({showSuggestions: false})
+    this.setState({ showSuggestions : false })
   }
 
   onChange (event) {
@@ -166,13 +167,13 @@ export default class InputCompletion extends Component {
 }
 
 InputCompletion.defaultProps = {
-  useNative: true
+  useNative : true
 }
 
 InputCompletion.propTypes = {
-  children: PropTypes.element.isRequired,
-  name: PropTypes.string.isRequired,
-  onValueChange: PropTypes.func,
-  options: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  useNative: PropTypes.bool
+  children : PropTypes.element.isRequired,
+  name : PropTypes.string.isRequired,
+  onValueChange : PropTypes.func,
+  options : PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  useNative : PropTypes.bool
 }

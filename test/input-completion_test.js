@@ -1,11 +1,11 @@
 import InputCompletion from '../src/input-completion.jsx'
-import {addons} from 'react/addons'
+import { addons } from 'react/addons'
 const {
   findRenderedDOMComponentWithTag,
   Simulate,
   renderIntoDocument
 } = addons.TestUtils
-const {stub} = sinon
+const { stub } = sinon
 
 describe('InputCompletion', () => {
 
@@ -26,13 +26,13 @@ describe('InputCompletion', () => {
     })
 
     it('returns true if the browser creates a <datalist> with `options`', () => {
-      document.createElement.returns({options : []})
+      document.createElement.returns({ options : [] })
 
       expect(InputCompletion.prototype._supportsNative()).to.be.true
     })
 
     it('returns false if the browser creates a <datalist> without `options`', () => {
-      document.createElement.returns({options : undefined})
+      document.createElement.returns({ options : undefined })
 
       expect(InputCompletion.prototype._supportsNative()).to.be.false
     })
@@ -70,7 +70,7 @@ describe('InputCompletion', () => {
     it('adds the correct properties to the child', () => {
       const input = findRenderedDOMComponentWithTag(component, 'input')
 
-      const {list, onChange, value} = input.props
+      const { list, onChange, value } = input.props
 
       expect(list).to.equal(props.name)
       expect(onChange).to.be.a('function')
@@ -82,7 +82,7 @@ describe('InputCompletion', () => {
       const value = 'sup victor'
       const input = findRenderedDOMComponentWithTag(component, 'input')
 
-      Simulate.change(input, {target : {value}})
+      Simulate.change(input, { target : { value } })
 
       expect(component.state.value).to.equal(value)
     })

@@ -6,8 +6,8 @@ const {
   scryRenderedDOMComponentsWithTag,
   Simulate
 } = addons.TestUtils
-const {expect} = chai
-const {match, stub} = sinon
+const { expect } = chai
+const { match, stub } = sinon
 
 describe('InputCompletion with native support', () => {
   let component
@@ -74,7 +74,7 @@ describe('InputCompletion with native support', () => {
       const value = 'sup victor'
       const input = findRenderedDOMComponentWithTag(component, 'input')
 
-      Simulate.change(input, {target : {value}})
+      Simulate.change(input, { target : { value } })
 
       expect(props.onValueChange).to.have.been.calledWith(match.object, value)
     })
