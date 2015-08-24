@@ -1,4 +1,4 @@
-import { Children, cloneElement, Component, findDOMNode, PropTypes } from 'react'
+import React, { Children, cloneElement, Component, findDOMNode, PropTypes } from 'react'
 
 const keys = {
   down : 'ArrowDown',
