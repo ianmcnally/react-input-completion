@@ -35,15 +35,15 @@ export default class InputCompletion extends Component {
     this.setState(newState)
   }
 
+  componentWillReceiveProps (nextProps) {
+    this.setState({
+      shownOptions : this._getOptionsToShow(this.state.value, nextProps.options)
+    })
+  }
+
   _supportsNative () {
     const feature = document.createElement('datalist')
     return Boolean(feature && feature.options)
-  }
-
-  _isOptionShown (input, option) {
-    const optionRegex = new RegExp(input, 'gi')
-
-    return input && option.match(optionRegex)
   }
 
   _getFallbackContainerStyles () {
@@ -106,6 +106,16 @@ export default class InputCompletion extends Component {
     return cloneElement(child, props)
   }
 
+  _isOptionShown (input, option) {
+    const optionRegex = new RegExp(input, 'gi')
+
+    return input && option.match(optionRegex)
+  }
+
+  _getOptionsToShow (value, options) {
+    return options.filter((option) => this._isOptionShown(value, option))
+  }
+
   onKeyDown (event) {
     const { key } = event
     const { selectedSuggestion, shownOptions } = this.state
@@ -145,7 +155,7 @@ export default class InputCompletion extends Component {
     if (!this.state.nativeSupport) {
       newState.selectedSuggestion = 0
       newState.showSuggestions = true
-      newState.shownOptions = this.props.options.filter((option) => this._isOptionShown(value, option))
+      newState.shownOptions = this._getOptionsToShow(value, this.props.options)
     }
 
     this.setState(newState)

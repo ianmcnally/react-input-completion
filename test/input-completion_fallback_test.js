@@ -1,5 +1,5 @@
 import InputCompletion from '../src/input-completion.jsx'
-import React, { addons } from 'react/addons'
+import React, { addons, Component } from 'react/addons'
 const {
   findRenderedDOMComponentWithTag,
   renderIntoDocument,
@@ -255,6 +255,34 @@ describe('InputCompletion with fallback', () => {
       Simulate.keyDown(input, { key : 'ArrowUp' })
 
       expect(component.state.selectedSuggestion).to.equal(0)
+    })
+
+    it('updates the shownOptions when props.options changes', () => {
+      const shownOption = 'abc'
+      const newOptions = [shownOption, 'def']
+      const value = 'abc'
+      class TestWrapper extends Component {
+        constructor (props) {
+          super(props)
+          this.state = { options : [] }
+        }
+        render () {
+          return (
+            <InputCompletion name='whatevs' options={this.state.options}>
+              <input type="text"/>
+            </InputCompletion>
+          )
+        }
+      }
+      const testComponent = renderIntoDocument(<TestWrapper />)
+      const input = findRenderedDOMComponentWithTag(testComponent, 'input')
+
+      Simulate.change(input, { target : { value } })
+      testComponent.setState({ options : newOptions })
+      const shownOptions = scryRenderedDOMComponentsWithTag(testComponent, 'li')
+
+      expect(shownOptions).not.to.be.empty
+      expect(shownOptions).to.have.deep.property('[0].props.children', shownOption)
     })
 
   })
