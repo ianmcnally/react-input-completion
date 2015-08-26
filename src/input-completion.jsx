@@ -23,19 +23,21 @@ export default class InputCompletion extends Component {
   componentDidMount () {
     const { useNative } = this.props
 
-    const newState = {
-      nativeSupport : (!useNative) ? false : this._supportsNative()
+    const state = {
+      useNative : (!useNative) ? false : this._supportsNative()
     }
 
-    if (!newState.nativeSupport) {
+    if (!state.useNative) {
       const offsetWidth = findDOMNode(this.refs.input).offsetWidth
-      newState.inputWidth = `${offsetWidth}px`
+      state.inputWidth = `${offsetWidth}px`
     }
 
-    this.setState(newState)
+    this.setState(state)
   }
 
   componentWillReceiveProps (nextProps) {
+    if (this.state.useNative) { return }
+
     this.setState({
       shownOptions : this._getOptionsToShow(this.state.value, nextProps.options)
     })
@@ -74,7 +76,7 @@ export default class InputCompletion extends Component {
   }
 
   _renderOptions () {
-    if (!this.state.nativeSupport) {
+    if (!this.state.useNative) {
       return this._renderFallbackOptions()
     }
 
@@ -99,7 +101,7 @@ export default class InputCompletion extends Component {
       value : this.state.value
     }
 
-    if (!this.state.nativeSupport) {
+    if (!this.state.useNative) {
       props.onKeyDown = this.onKeyDown.bind(this)
     }
 
@@ -152,7 +154,7 @@ export default class InputCompletion extends Component {
     const { value } = event.target
     const newState = { value }
 
-    if (!this.state.nativeSupport) {
+    if (!this.state.useNative) {
       newState.selectedSuggestion = 0
       newState.showSuggestions = true
       newState.shownOptions = this._getOptionsToShow(value, this.props.options)
