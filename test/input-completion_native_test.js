@@ -2,7 +2,9 @@ import InputCompletion from '../src/input-completion.jsx'
 import { addons } from 'react/addons'
 const {
   findRenderedDOMComponentWithTag,
+  findRenderedDOMComponentWithClass,
   renderIntoDocument,
+  scryRenderedDOMComponentsWithClass,
   scryRenderedDOMComponentsWithTag,
   Simulate
 } = addons.TestUtils
@@ -66,6 +68,14 @@ describe('InputCompletion with native support', () => {
 
     expect(datalist).to.be.empty
     expect(fallback).to.be.ok
+  })
+
+  it('sets a class on the list and each option', () => {
+    const list = findRenderedDOMComponentWithClass(component, 'ric-options')
+    const options = scryRenderedDOMComponentsWithClass(component, 'ric-option')
+
+    expect(list).not.to.be.empty
+    expect(options).not.to.be.empty
   })
 
   context('on input', () => {

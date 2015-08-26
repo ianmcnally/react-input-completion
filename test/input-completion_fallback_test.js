@@ -1,8 +1,10 @@
 import InputCompletion from '../src/input-completion.jsx'
 import React, { addons, Component } from 'react/addons'
 const {
+  findRenderedDOMComponentWithClass,
   findRenderedDOMComponentWithTag,
   renderIntoDocument,
+  scryRenderedDOMComponentsWithClass,
   scryRenderedDOMComponentsWithTag,
   Simulate
 } = addons.TestUtils
@@ -67,6 +69,12 @@ describe('InputCompletion with fallback', () => {
       })
       // strict equality doesn't work for arrays
       expect(component.state).to.have.property('shownOptions').that.is.an('array')
+    })
+
+    it('sets a class on the list', () => {
+      const list = findRenderedDOMComponentWithClass(component, 'ric-options')
+
+      expect(list).not.to.be.empty
     })
 
   })
@@ -171,6 +179,12 @@ describe('InputCompletion with fallback', () => {
 
     it('sets aria attributes on an option', () => {
       expect(option.props.role).to.equal('option')
+    })
+
+    it('sets a class on each option', () => {
+      const options = scryRenderedDOMComponentsWithClass(component, 'ric-option')
+
+      expect(options).not.to.be.empty
     })
 
     it('updates the input value to option.value on option mouseDown', () => {

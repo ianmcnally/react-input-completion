@@ -1,6 +1,7 @@
 import InputCompletion from '../src/input-completion.jsx'
 import { addons } from 'react/addons'
 const {
+  findRenderedDOMComponentWithClass,
   findRenderedDOMComponentWithTag,
   Simulate,
   renderIntoDocument
@@ -85,6 +86,12 @@ describe('InputCompletion', () => {
       Simulate.change(input, { target : { value } })
 
       expect(component.state.value).to.equal(value)
+    })
+
+    it('sets a class on the container', () => {
+      const container = findRenderedDOMComponentWithClass(component, 'ric-wrapper')
+
+      expect(container).not.to.be.empty
     })
 
   })

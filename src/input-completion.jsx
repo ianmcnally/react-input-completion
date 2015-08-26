@@ -6,6 +6,12 @@ const keys = {
   up : 'ArrowUp'
 }
 
+const styleClasses = {
+  list : 'ric-options',
+  option : 'ric-option',
+  wrapper : 'ric-wrapper'
+}
+
 export default class InputCompletion extends Component {
 
   constructor (props) {
@@ -61,14 +67,15 @@ export default class InputCompletion extends Component {
       const onMouseDown = this.onFallbackOptionClick.bind(this, option)
 
       return (
-        <li aria-selected={isSelected} className='ric-fb-option' key={index} onMouseDown={onMouseDown} role='option'>
+        <li aria-selected={isSelected} className={styleClasses.option}
+          key={index} onMouseDown={onMouseDown} role='option'>
           {option}
         </li>
       )
     })
 
     return (
-      <ul aria-multiselectable='false' className='ric-fb-options' role='listbox'
+      <ul aria-multiselectable='false' className={styleClasses.list} role='listbox'
         style={this._getFallbackContainerStyles()}>
         {options}
       </ul>
@@ -81,11 +88,11 @@ export default class InputCompletion extends Component {
     }
 
     const options = this.props.options.map((option, index) => {
-      return <option key={index} value={option} />
+      return <option className={styleClasses.option} key={index} value={option} />
     })
 
     return (
-      <datalist id={this.props.name}>
+      <datalist className={styleClasses.list} id={this.props.name}>
         {options}
       </datalist>
     )
@@ -169,7 +176,7 @@ export default class InputCompletion extends Component {
 
   render () {
     return (
-      <section>
+      <section className={styleClasses.wrapper}>
         {this._renderChildren()}
         {this._renderOptions()}
       </section>
