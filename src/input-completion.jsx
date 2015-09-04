@@ -9,6 +9,7 @@ const keys = {
 const styleClasses = {
   list : 'ric-options',
   option : 'ric-option',
+  optionSelected: `ric-option ric-option--selected`,
   wrapper : 'ric-wrapper'
 }
 
@@ -65,9 +66,10 @@ export default class InputCompletion extends Component {
     const options = this.state.shownOptions.map((option, index) => {
       const isSelected = index === this.state.selectedSuggestion
       const onMouseDown = this.onFallbackOptionClick.bind(this, option)
+      const className = isSelected ? styleClasses.optionSelected : styleClasses.option
 
       return (
-        <li aria-selected={isSelected} className={styleClasses.option}
+        <li aria-selected={isSelected} className={className}
           key={index} onMouseDown={onMouseDown} role='option'>
           {option}
         </li>

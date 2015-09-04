@@ -225,12 +225,13 @@ describe('InputCompletion with fallback', () => {
       expect(optionsContainer.props.style).to.include({ display : 'none' })
     })
 
-    it('sets a selected attribute when the option is selected', () => {
+    it('sets a selected attribute and class when the option is selected', () => {
       expect(option.props['aria-selected']).to.be.false
 
       Simulate.keyDown(input, { key : 'ArrowDown' })
 
       expect(option.props['aria-selected']).to.be.true
+      expect(option.props.className).to.contain('ric-option--selected')
     })
 
     it('increases the selected option on down arrow press', () => {
