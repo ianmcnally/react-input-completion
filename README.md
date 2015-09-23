@@ -3,6 +3,8 @@ A cross-browser autocomplete component for React.
 
 `<InputCompletion>` defaults to the native HTML5 `<datalist>` (unless you prefer it didn't) and polyfills any unsupported browsers, with no external dependencies.
 
+[![Build Status](https://travis-ci.org/imcnally/react-input-completion.svg?branch=master)](https://travis-ci.org/imcnally/react-input-completion)
+
 ## Usage
 
 `<InputCompletion>` wraps an input, and connects it to a list of `options`.
