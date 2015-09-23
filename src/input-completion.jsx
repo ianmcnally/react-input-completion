@@ -9,7 +9,7 @@ const keys = {
 const styleClasses = {
   list : 'ric-options',
   option : 'ric-option',
-  optionSelected: `ric-option ric-option--selected`,
+  optionSelected : `ric-option ric-option--selected`,
   wrapper : 'ric-wrapper'
 }
 
