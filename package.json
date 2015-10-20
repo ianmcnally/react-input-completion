@@ -15,12 +15,13 @@
     "prepublish": "babel src/input-completion.jsx --out-file react-input-completion.js && cp src/input-completion.css ./react-input-completion.css",
     "start": "webpack-dev-server --content-base demo/ --port 3000 --hot --inline",
     "test": "karma start test/karma.conf.js",
+    "watch": "npm run test -- --single-run=false",
     "lint": "eslint test src && jscs test src"
   },
   "author": "Ian McNally <ianmcnally@gmail.com>",
   "license": "ISC",
   "peerDependencies": {
-    "react": "^0.13.3"
+    "react": "^0.14.0"
   },
   "devDependencies": {
     "babel": "^5.8.21",
@@ -38,7 +39,10 @@
     "karma-phantomjs-launcher": "^0.2.0",
     "karma-sinon-chai": "^1.0.0",
     "karma-webpack": "^1.7.0",
+    "lodash": "^3.10.1",
     "phantomjs": "^1.9.17",
+    "react-addons-test-utils": "^0.14.0",
+    "react-dom": "^0.14.0",
     "style-loader": "^0.12.3",
     "webpack": "^1.11.0",
     "webpack-dev-server": "^1.10.1"

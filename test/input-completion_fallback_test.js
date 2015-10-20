@@ -1,13 +1,15 @@
 import InputCompletion from '../src/input-completion.jsx'
-import React, { addons, Component } from 'react/addons'
-const {
+import { Component } from 'react'
+import ReactDOM from 'react-dom'
+import {
   findRenderedDOMComponentWithClass,
   findRenderedDOMComponentWithTag,
   renderIntoDocument,
   scryRenderedDOMComponentsWithClass,
   scryRenderedDOMComponentsWithTag,
   Simulate
-} = addons.TestUtils
+} from 'react-addons-test-utils'
+import { assign } from 'lodash'
 const { match, stub } = sinon
 
 describe('InputCompletion with fallback', () => {
@@ -48,7 +50,7 @@ describe('InputCompletion with fallback', () => {
 
     beforeEach(() => {
       inputWidth = 150
-      stub(React, 'findDOMNode').returns({ offsetWidth : inputWidth })
+      stub(ReactDOM, 'findDOMNode', (node) => assign({}, node, { offsetWidth : inputWidth }))
 
       component = renderIntoDocument(
         <InputCompletion {...props}>
@@ -58,7 +60,7 @@ describe('InputCompletion with fallback', () => {
     })
 
     afterEach(() => {
-      React.findDOMNode.restore()
+      ReactDOM.findDOMNode.restore()
     })
 
     it('initializes state variables for the fallback', () => {

@@ -1,11 +1,10 @@
 import InputCompletion from '../src/input-completion.jsx'
-import { addons } from 'react/addons'
-const {
+import {
   findRenderedDOMComponentWithClass,
   findRenderedDOMComponentWithTag,
   Simulate,
   renderIntoDocument
-} = addons.TestUtils
+} from 'react-addons-test-utils'
 const { stub } = sinon
 
 describe('InputCompletion', () => {

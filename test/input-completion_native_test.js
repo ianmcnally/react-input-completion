@@ -1,13 +1,12 @@
 import InputCompletion from '../src/input-completion.jsx'
-import { addons } from 'react/addons'
-const {
+import {
   findRenderedDOMComponentWithTag,
   findRenderedDOMComponentWithClass,
   renderIntoDocument,
   scryRenderedDOMComponentsWithClass,
   scryRenderedDOMComponentsWithTag,
   Simulate
-} = addons.TestUtils
+} from 'react-addons-test-utils'
 const { expect } = chai
 const { match, stub } = sinon
 
