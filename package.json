@@ -21,7 +21,8 @@
   "author": "Ian McNally <ianmcnally@gmail.com>",
   "license": "ISC",
   "peerDependencies": {
-    "react": "^0.14.0"
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0"
   },
   "devDependencies": {
     "babel": "^5.8.21",
@@ -42,7 +43,6 @@
     "lodash": "^3.10.1",
     "phantomjs": "^1.9.17",
     "react-addons-test-utils": "^0.14.0",
-    "react-dom": "^0.14.0",
     "style-loader": "^0.12.3",
     "webpack": "^1.11.0",
     "webpack-dev-server": "^1.10.1"
