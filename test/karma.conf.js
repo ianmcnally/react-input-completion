@@ -1,6 +1,3 @@
-// Karma configuration
-// Generated on Fri Jul 24 2015 15:22:26 GMT-0400 (EDT)
-
 module.exports = function (config) {
   config.set({
 
@@ -13,8 +10,8 @@ module.exports = function (config) {
 
     // list of files / patterns to load in the browser
     files : [
-      'node_modules/karma-babel-preprocessor/node_modules/babel-core/browser-polyfill.min.js',
-      'node_modules/react/dist/react-with-addons.min.js',
+      'node_modules/es5-shim/es5-shim.min.js',
+      'node_modules/react/dist/react.min.js',
       'test/*_test.js'
     ],
 
@@ -23,7 +20,7 @@ module.exports = function (config) {
         loaders : [
           {
             test : /\.jsx?$/,
-            loader : 'babel-loader'
+            loader : 'babel'
           }
         ]
       }
