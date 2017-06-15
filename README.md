@@ -1,4 +1,6 @@
 # react-input-completion
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/ianmcnally/react-input-completion.svg)](https://greenkeeper.io/)
 A cross-browser autocomplete component for React.
 
 `<InputCompletion>` defaults to the native HTML5 `<datalist>` (unless you prefer it didn't) and polyfills any unsupported browsers, with no external dependencies.
